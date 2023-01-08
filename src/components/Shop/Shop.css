@@ -30,5 +30,22 @@
 
 .cart-container{
     background-color: rgba(255, 153, 0, 0.3);
-    /* margin-top: 50px; */
+    
+}
+
+.review-button{
+    background: #FF9900;
+    border-radius: 4px;
+    width: 200px;
+    height: 48px;
+    border: 0px;
+    cursor: pointer;
+    color: white;
+    font-size: 23px;
+    
+}
+
+.review-icon{
+    margin-left: 10px;
+    font-size: 23px;
 }

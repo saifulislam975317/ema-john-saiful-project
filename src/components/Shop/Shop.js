@@ -1,19 +1,18 @@
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useProducts from '../../hooks/useProducts';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css'
 
 const Shop = () => {
-    const [products, setProducts] = useState([])
+    const [products] = useProducts()
     const [cart, setCart] = useState([])
-
-    useEffect( () =>{
-        fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
-        .then(response => response.json())
-        .then(data => setProducts(data))
-        
-    },[])
+    const navigate = useNavigate()
+   
  
     useEffect(()=>{
         const storedCart = getStoredCart()
@@ -29,6 +28,8 @@ const Shop = () => {
         }
         setCart(saveCart)
     },[products])
+
+
 const handleAddToCart = (selectedProduct)=>{
    let newCart = [];
     const alreadyHaveId = cart.find(product => product.id === selectedProduct.id);
@@ -55,7 +56,12 @@ return (
       
  </div>
  <div className="cart-container">
-    <Cart cart={cart}></Cart>
+    <Cart cart={cart}>
+        
+        <button className='review-button' onClick={()=>navigate('/orders')}>Review Order<FontAwesomeIcon className='review-icon' icon={faArrowRight}></FontAwesomeIcon></button>
+        
+    </Cart>
+    
  </div>
  </div>
     );
